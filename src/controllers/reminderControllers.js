@@ -16,7 +16,7 @@ export const ReminderController = {
         
         try {
         const reminderId = parseInt(req.params.id, 10)
-        const reminder = await ReminderService.getReminderById(reminderId);
+        const reminder =  ReminderService.getReminderById(reminderId);
         res.status(200).json(reminder);
         } catch (error) {
             res.status(500).send({message: 'Internal Server Error'})
@@ -29,8 +29,8 @@ export const ReminderController = {
         
         try {
     
-            const newReminder = await ReminderService.createReminder(req.body);
-            res.status(200).json(newReminder);
+            const reminder =  ReminderService.createReminder(req.body);
+            res.status(200).json(reminder);
             
             
         } catch (error) {
@@ -42,8 +42,8 @@ export const ReminderController = {
         
         try {
             const reminderId = parseInt(req.params.id)
-            const updateReminder = await ReminderService.updateReminder(reminderId, req.body);
-            res.send(200).json(updateReminder)
+            const reminder =  ReminderService.updateReminder(reminderId, req.body);
+            res.send(200).json(reminder)
 
         } catch (error) {
             res.status(500).send({ message: 'Internal Server Error' });
@@ -54,8 +54,8 @@ export const ReminderController = {
         try {
             const reminderId = parseInt(req.params.id)
 
-            const reminder = await ReminderService.deleteReminder(reminderId);
-            res.send(200).json(this.deleteReminder)
+            const reminder =  ReminderService.deleteReminder(reminderId);
+            res.send(200).json(reminder)
         } catch (error) {
             res.status(500).send({
                 message: 'Internal Server Error'

@@ -1,20 +1,39 @@
+import { ReminderModel } from "../models/reminderModel.js";
+
 export const ReminderService = {
     async getAllReminders() {
         // fetch all reminder;
-        return [];
+        return ReminderModel.getAll;
     },
-    async getReminderById() {
+    async getReminderById(reminderId) {
         // fetch reminder by id
-        return {}; 
+        const reminder = await ReminderModel.findById(reminderId);
+        if(!reminder) {
+            throw new Error('reminder not found')
+        }
+        return reminder;
     },
     async createReminder(newReminder) {
         // create reminder
-        return {};
+
+        const { reminder, notes , userId } = newReminder;
+
+        const sanitizedReminder = {
+            reminder: reminder?.trim(),
+            notes: notes?.trim(),
+            userId,
+            
+        }
+
+        const createdReminder = ReminderModel.create(sanitizedReminder);
+        return createdReminder;
     },
 
     async updateReminder(reminderId, newValues) {
         // update reminder
         return {};
+
+        
 
     },
 
